@@ -1,3 +1,5 @@
+from collections import defaultdict
+from collections import Counter
 import pandas as pd
 from pprint import pprint  # pprint를 이용해서 출력하면 print가 정렬된다
 from typing import List  # 타입 힌팅을 사용한다
@@ -200,3 +202,144 @@ for idx, like_length in enumerate(  # enumerate로 인덱스값을 포함
             like_length=like_length, **song_list[idx]
         )
     )
+
+"""멜론TOP100 리스트에서 "곡명" 단어수로 TOP10 곡명 리스트 만들어 출력
+-단어수가 많으면 우선순위""" """아래 좋아요 수로 top10"""
+
+
+def pick_like_value(song_dict):
+    return song_dict["like"]
+
+
+sorted_song_list = sorted(song_list, key=pick_like_value, reverse=True)
+# 214줄 범위를 아래 코드로 지정하고 in 뒤에 top10_song_list를 넣을 수 있다
+# top10_song_list=sorted_song_list[:10]
+
+for song_dict in sorted_song_list[0:10]:
+    # 210 줄을 지우고 in 뒤에 아래 코드를 넣는 것으로 대체 가능
+    # sorted(song_list, key=pick_like_value,reverse=True)[:10]:
+    print("{like} {title}".format(**song_dict))
+
+"""곡명 단어 수로 top10"""
+
+
+def pick_word_count_for_title(song_dict):
+    title: str = song_dict["title"]
+    word_list = title.split()
+    return len(word_list)
+
+
+sorted_song_list = sorted(song_list, key=pick_word_count_for_title, reverse=True)
+top10_song_list = sorted_song_list[:10]
+
+for song_dict in top10_song_list:
+
+    print("{like} {title}".format(**song_dict))
+
+"""max, min 함수"""
+"""좋아요 수가 가장 많고 적은 곡은?"""
+
+
+def peek_like_for_song(song_dict):
+    return song_dict["like"]
+
+
+# 에러처리 1번 (song_list가 비었을 때)
+song_dict = max(
+    song_list, key=peek_like_for_song, default=None
+)  # song_dict이 비었으면 default 값을 내보냄
+if song_dict == None:
+    print("노래 제목이 비었습니다")
+else:
+    print(song_dict)
+# 에러처리 2번
+try:  # 에러가 발생하게 두고 그 에러를 잡는다-파이썬에서 주로 사용하는 방법
+    song_dict = max(song_list, key=peek_like_for_song)
+except ValueError:
+    print("노래 제목이 비었습니다")
+else:
+    print(song_dict)
+# 에러처리 3번
+if song_list:  # 에러를 미리 검사-보통 파이썬에서 사용하기보다는 c에서 주로 사용하는 방법
+    song_dict = max(song_list, key=peek_like_for_song)
+    print(song_dict)
+else:
+    print("노래목록이 비었습니다")
+
+"""리스트에 랭크된 가수는 총 몇 팀인가요?(중복 제가한 가수명 리스트의 크기)"""
+# 방법 1
+artist_list = []
+for song_dict in song_list:
+    artist: str = song_dict["artist"]
+    if artist not in artist_list:
+        artist_list.append(artist)
+print(len(artist_list))
+
+# 방법 2
+artist_set = set()
+for song_dict in song_list:
+    artist: str = song_dict["artist"]
+    artist_set.add(artist)  # 집합에 추가하는 것은 add 순서가 없기 때문
+print(len(artist_set))
+
+# 방법 3
+# for song_dict in song_list:
+#     song_dict["artist"]
+# 위와 아래 2줄 코드는 같음
+# [song_dict["artist"]
+# for song_dict in song_list]
+
+artist_set = set([song_dict["artist"] for song_dict in song_list])  # set이 중복을 제거해줌
+print(len(artist_set))
+
+# 방법 4
+artist_set = {song_dict["artist"] for song_dict in song_list}
+print(len(artist_set))
+
+"""2곡이상 랭크된 가수는 몇 팀인가요?"""
+
+artist_list = [song_dict["artist"] for song_dict in song_list]
+
+# 방법 1
+song_count_dict = {}  # key: artist, value: song count
+for artist in artist_list:
+    if artist not in song_count_dict:
+        song_count_dict[artist] = 0
+    else:
+        song_count_dict[artist] += 1
+
+pprint(song_count_dict)
+
+# 방법 2
+# keyerror가 발생할 때, key error를 숨기고, 지정된 디폴트 값으로 key/value을 저장합니다
+song_count_dict = defaultdict(int)
+for artist in artist_list:
+    song_count_dict[artist] += 1
+
+pprint(song_count_dict)
+
+# 카운터 이용 방법 1
+song_count_dict = Counter(artist_list)
+
+artist_count_above_2 = 0
+for song_count in song_count_dict.values():
+    if song_count >= 2:
+        artist_count_above_2 += 1
+print(artist_count_above_2)
+
+# 방법 2
+song_count_dict = Counter(artist_list)
+
+
+def check_above_1(song_count):
+    return song_count > 1
+
+
+print(len(list(filter(check_above_1, song_count_dict.values()))))
+
+"""방탄소년단의 좋아요 총 합은?"""
+# List Comprehension with if statement
+like_sum_for_bts = sum(
+    [song_dict["like"] for song_dict in song_list if song_dict["artist"] == "방탄소년단"]
+)
+print(like_sum_for_bts)

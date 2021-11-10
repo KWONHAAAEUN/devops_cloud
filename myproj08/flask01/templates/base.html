@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <!--어떤 인코딩으로 이뤄져있는지 명시-->
+    <title>html 시작하기</title>
+    <style>
+        body {
+            background-color: lightblue;
+            /*css 주석*/
+        }
+
+        h1 {
+            font-weight: bold;
+            color: steelblue;
+            border-bottom: 3px dashed gray;
+        }
+
+        h1:hover {
+            /*마우스를 올려두면 바꿔주는 것*/
+            color: white;
+            cursor: pointer;
+        }
+
+        #top_nav li {
+            display: inline;
+            /*한줄로 나옴*/
+        }
+
+        #top_nav li a {
+            color: #333333;
+            text-decoration: none;
+        }
+
+        #top_nav li a:hover {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul id="top_nav">
+            <li><a href="/">처음으로</a></li>
+            <li><a href="/profile">프로필</a></li>
+            <li><a href="/posts">블로그</a></li>
+            <li><a href="https://github.com/KWONHAAAEUN">깃허브</a></li>
+        </ul>
+    </nav>
+    <div><img src="/static/moon.jpg"
+            style="margin: 0 auto; display: block; width: 200px; border-radius: 100px; box-shadow: 1px 1px 1px #aaaaaa;" />
+    </div>
+    {% block body %}
+    {% endblock %}
+
+    <hr />
+    &copy; 2021. 하은 컴퍼니
+</body>
+
+</html>
