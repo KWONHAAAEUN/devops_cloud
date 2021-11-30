@@ -1,12 +1,6 @@
 from django.db import models
 
 
-# gen = [
-#     ("남", "남"),
-#     ("여", "여"),
-# ]
-
-
 class profile(models.Model):
     name = models.CharField(max_length=100, verbose_name="이름")
     gen = (

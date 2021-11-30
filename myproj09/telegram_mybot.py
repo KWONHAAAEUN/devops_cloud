@@ -3,20 +3,22 @@ import pprint
 import telegram
 import os
 import sys
-from telegram.ext import Updater,CommandHandler,MessageHandler, Filters
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import tasks
 
 token = "2114338021:AAHnWg3XkYxWGSaS5Tp0pD8JkZ_ENS32QPc"
-updater=Updater(token=token,use_context=True)
+updater = Updater(token=token, use_context=True)
 
-dispatcher=updater.dispatcher
+dispatcher = updater.dispatcher
 
-def start(update,context):
+
+def start(update, context):
     """대화방이 처음 열리면 자동으로 호출"""
     context.bot.send_message(
         chat_id=update.effective_chat.id,
         text="안녕 나는 커비야 반가워!"
     )
+
 
 def echo(update, context):
     received_text: str = update.message.text
@@ -39,11 +41,12 @@ def echo(update, context):
         chat_id=update.effective_chat.id,
         text=response_text)
 
-start_handler=CommandHandler("start",start)
+
+start_handler = CommandHandler("start", start)
 dispatcher.add_handler(start_handler)
 
-echo_handler=MessageHandler(
-    Filters.text&(~Filters.command),
+echo_handler = MessageHandler(
+    Filters.text & (~Filters.command),
     echo,
 )
 dispatcher.add_handler(echo_handler)

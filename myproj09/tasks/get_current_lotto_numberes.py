@@ -8,7 +8,9 @@ def check_available(received_text: str) -> bool:
 
 def make_response(received_text: str, html: str = None) -> str:
     if html is None:
-        url = 'https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&query=%EB%A1%9C%EB%98%90%EB%B2%88%ED%98%B8+%EB%8B%B9%EC%B2%A8%EB%B2%88%ED%98%B8+%EC%A1%B0%ED%9A%8C&oquery=%EB%A1%9C%EB%98%90%EB%B2%88%ED%98%B8&tqi=hh3pkdprvTossMF857sssssstpl-495514'
+        url = 'https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&query=%EB%A1%9C%EB%98%90%EB%B2%88' \
+              '%ED%98%B8+%EB%8B%B9%EC%B2%A8%EB%B2%88%ED%98%B8+%EC%A1%B0%ED%9A%8C&oquery=%EB%A1%9C%EB%98%90%EB%B2%88' \
+              '%ED%98%B8&tqi=hh3pkdprvTossMF857sssssstpl-495514 '
         response = requests.get(url)
         html = response.text
 
