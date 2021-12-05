@@ -1,0 +1,12 @@
+{% extends "unique/layout.html" %}
+{% block content %}
+    {% for unique in unique_list %}
+        <a href="/unique/{{ unique.pk }}">
+            {{ unique.name }}
+        </a>
+        <a href="tel:{{ unique.telephone }}">
+            {{ unique.telephone }}
+        </a>
+    {% endfor %}
+
+{% endblock %}
