@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from unique.views import unique_list,unique_detail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('unique/', unique_list),
+    path('unique/<int:pk>',unique_detail),
+
 ]
