@@ -4,9 +4,9 @@
     <p>
         태그:
         {% for tag in tag_list %}
-            <span class="badge bg-success">
+            <a href="{% url "diary:tag_detail" tag.name %}" class="badge bg-success">
                 {{ tag.name }}
-            </span>
+            </a>
         {% endfor %}
 
     </p>
