@@ -1,5 +1,5 @@
 __pycache__
-sb.sqlite3
+db.sqlite3
 media
 .idea
 .vscode
