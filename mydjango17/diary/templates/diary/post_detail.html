@@ -1,10 +1,31 @@
 {% extends "diary/layout.html" %}
 {% block content %}
     <h2>{{ post.title }}</h2>
+    <p>
+        태그:
+        {% for tag in tag_list %}
+            <span class="badge bg-success">
+                {{ tag.name }}
+            </span>
+        {% endfor %}
+
+    </p>
 
     <img src="{{ post.photo.url }}" alt="{{ post.title }}"/>
 
     {{ post.content|linebreaks }} <!-- p태그 -->
+
+    <h3>댓글</h3>
+    <ul>
+        {% for comment in comment_list %}
+            <li>
+                {{ comment.message }}
+                by {{ comment.author_name }}
+                at {{ comment.created_at }}
+            </li>
+
+        {% endfor %}
+    </ul>
 
     <hr />
 

@@ -28,7 +28,9 @@ class Post(TimestampedModel):
         verbose_name_plural="포스팅 목록"
 
 class Comment(TimestampedModel):
+    # 외래키: 정수값
     post=models.ForeignKey(Post, on_delete=models.CASCADE)
+    # post_id
     author_name=models.CharField(max_length=20)
     message=models.TextField()
 
