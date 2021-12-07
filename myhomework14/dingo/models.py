@@ -11,7 +11,7 @@ class Video(models.Model):
     thumbnail_file_thumb = ImageSpecField(
         source="thumbnail_file",
         processors=[ResizeToFill(100, 50)],
-        format="JPEG",
+        format="PNG",
         options={"quality": 60},
     )
     created_at = models.DateTimeField(auto_now_add=True)

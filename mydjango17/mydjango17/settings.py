@@ -20,12 +20,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # third apps
+    # local apps
+    'diary',
 ]
 # 위 디버그를 참조하기 위해서 if를 사용하는 것
 if DEBUG:

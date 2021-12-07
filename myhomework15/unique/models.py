@@ -1,6 +1,6 @@
 from django.db import models
 
-class Unique(models.Model):
+class Shop(models.Model):
     name=models.CharField(max_length=100, db_index=True)
     address=models.CharField(max_length=100)
     telephone=models.CharField(max_length=15)

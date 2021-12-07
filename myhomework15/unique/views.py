@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpRequest
-from unique.models import Unique
+from unique.models import Shop
 
 def unique_list(request: HttpRequest) -> HttpResponse:
-    qs=Unique.objects.all()
+    qs=Shop.objects.all()
     query=request.GET.get("query","")
     if query:
         qs=qs.filter(name__icontains=query)
@@ -13,7 +13,7 @@ def unique_list(request: HttpRequest) -> HttpResponse:
     return  render(request,"unique/unique_list.html",context_data)
 
 def unique_detail(request: HttpRequest, pk:int) -> HttpResponse:
-    unique=Unique.objects.get(pk=pk)
+    unique=Shop.objects.get(pk=pk)
     context_data={
         "unique":unique,
     }

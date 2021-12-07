@@ -1,0 +1,11 @@
+{% extends "bread/layout.html" %}
+{% block content %}
+<h2>{{ shop.name }}</h2>
+    <ul>
+        <li>주소{{ shop.address }}</li>
+        <li>tel:{{ shop.telephone }}</li>
+    </ul>
+    {{ shop.description|linebreaks }}
+    <hr />
+    <a href="/bread/" class="btn btn-primary">목록</a>
+{% endblock %}

@@ -1,8 +1,8 @@
 from django.contrib import admin
-from unique.models import Unique
+from unique.models import Shop
 
-class UniqueAdmin(admin.ModelAdmin):
+class ShopAdmin(admin.ModelAdmin):
     list_display = ['id','name','address','telephone','description']
     list_display_links = ['name']
 
-admin.site.register(Unique,UniqueAdmin)
+admin.site.register(Shop,ShopAdmin)

@@ -1,11 +1,11 @@
 {% extends "unique/layout.html" %}
 {% block content %}
-    <h2>{{ unique.name }}</h2>
+    <h2>{{ shop.name }}</h2>
     <ul>
-        <li>주소:{{ unique.address }}</li>
-        <li>tel:{{ unique.telephone }}</li>
+        <li>주소:{{ shop.address }}</li>
+        <li>tel:{{ shop.telephone }}</li>
     </ul>
-    {{ unique.description|linebreaks }}
+    {{ shop.description|linebreaks }}
     <hr />
     <a href="/unique/" class="btn btn-primary">목록으로</a>
 

@@ -18,8 +18,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from dingo.views import index, video_detail
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("dingo/", index),
+    path("dingo/<int:pk>/", video_detail),
+
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
