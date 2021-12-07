@@ -44,6 +44,6 @@ class Tag(TimestampedModel):
 
     class Meta:
         verbose_name="태그"
-        verbose_name_plural="태그그 목록"
+        verbose_name_plural="태그 목록"
 
 #class에 TimestampedModel를 넣음으로 상속을 하는 것

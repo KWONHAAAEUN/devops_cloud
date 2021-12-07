@@ -1,0 +1,13 @@
+{% extends "diary/layout.html" %}
+
+<!-- block안에 지정해주지 않는 것은 무시된다 -->
+{% block content %}
+<ul>
+<!-- views에서 지정해준 것을 in 뒤에 넣어줘야함  -->
+    {% for post in post_list %}
+        <li>
+            {{ post.title }}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
