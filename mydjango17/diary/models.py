@@ -15,6 +15,7 @@ class Post(TimestampedModel):
     photo=models.ImageField(upload_to="diary/post/%Y/%m/%d")
     # 그냥 Tag를 적으면 Tag가 아래에 있기에 받지 못한다
     # 문자열로 넣어주면 현재 앱에서 Tag를 찾아 받아준다
+    # tag_set이 아닌 tag라고 하면 단수형이기에 의미가 좋지는 않다
     tag_set=models.ManyToManyField('Tag',blank=True)
 
     def __str__(self)->str:
@@ -27,6 +28,7 @@ class Post(TimestampedModel):
         verbose_name_plural="포스팅 목록"
 
 class Comment(TimestampedModel):
+    post=models.ForeignKey(Post, on_delete=models.CASCADE)
     author_name=models.CharField(max_length=20)
     message=models.TextField()
 
@@ -42,6 +44,6 @@ class Tag(TimestampedModel):
 
     class Meta:
         verbose_name="태그"
-        verbose_name_plural="태그 목록"
+        verbose_name_plural="태그그 목록"
 
-# class에 TimestampedModel를 넣음으로 상속을 하는 것
+#class에 TimestampedModel를 넣음으로 상속을 하는 것
