@@ -1,0 +1,12 @@
+{% extends "diary/layout.html" %}
+
+{% block content %}
+    <h2>Post Form</h2>
+    <form action="" method="post" enctype="multipart/form-data"> <!-- 주소를 깔끔하게 바꿔줬다 -->
+        {% csrf_token %}
+        <table>
+        {{ form.as_table }}
+        </table>
+        <input type="submit" value="저장하기"/>
+    </form>
+{% endblock %}
