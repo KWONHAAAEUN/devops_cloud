@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinLengthValidator
 
 class TimestampedModel(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
@@ -10,7 +11,10 @@ class TimestampedModel(models.Model):
 #db_index는 db에 인덱스를 생성시켜 조건을 넣으면 검색이 가능하게 하는 부분
 class Post(TimestampedModel):
     author_name=models.CharField(max_length=20)
-    title=models.CharField(max_length=200, db_index=True)
+    title=models.CharField(max_length=200, db_index=True,validators=[
+        MinLengthValidator(3),
+        # MaxLengthValiadtor(),는 따로 할 필요가 없다 내부에 max_length=200을 설정해줬기 때문
+    ],)
     content=models.TextField()
     photo=models.ImageField(upload_to="diary/post/%Y/%m/%d")
     # 그냥 Tag를 적으면 Tag가 아래에 있기에 받지 못한다
