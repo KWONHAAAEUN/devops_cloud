@@ -8,5 +8,6 @@ urlpatterns=[
     path("",views.post_list, name="post_list"),
     path("<int:pk>/",views.post_detail,name="post_detail"),# 주소 매칭
     path("new/",views.post_new,name="post_new"),
+    path("<int:pk>/edit/", views.post_edit,name="post_edit"),
     path("tags/<str:tag_name>/",views.tag_detail,name="tag_detail"),
 ]
