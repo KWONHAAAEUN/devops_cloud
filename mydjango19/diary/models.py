@@ -17,6 +17,7 @@ class Post(TimestampedModel):
     # 문자열로 넣어주면 현재 앱에서 Tag를 찾아 받아준다
     # tag_set이 아닌 tag라고 하면 단수형이기에 의미가 좋지는 않다
     tag_set=models.ManyToManyField('Tag',blank=True)
+    ip = models.GenericIPAddressField()
 
     def __str__(self)->str:
         return self.title
