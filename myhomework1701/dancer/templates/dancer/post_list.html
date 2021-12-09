@@ -1,0 +1,15 @@
+{% extends "dancer/layout.html" %}
+
+{% block content %}
+        <form action="" method="get">
+        <input type="text" name="query" value="{{ request.GET.query }}"/>
+        <!-- value를 지정해서 검색해도 검색했던 단어가 사라지지 않게 함 -->
+        <input type="submit" value="검색"/>
+    </form>
+    {% for post in post_list %}
+            <img src="{{ post.photo.url }}"
+                 alt="{{ post.team_name }}"/>
+        {{ post.team_name }}
+            <a href="{% url "dancer:post_detail" post.pk %}" class="btn btn-sm btn-primary">상세정보</a>
+    {% endfor %}
+{% endblock %}

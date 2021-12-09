@@ -1,0 +1,11 @@
+{% extends "dancer/layout.html" %}
+{% block content %}
+    <img src="{{ post.photo.url }}" alt="{{ post.title }}"/>
+    <h2>{{ post.team_name }}</h2>
+    <ul>
+        <li>{{ post.member }}</li>
+    </ul>
+    {{ post.content|linebreaks }}
+    <hr />
+    <a href="/dancer/" class="btn btn-primary">목록으로</a>
+{% endblock %}

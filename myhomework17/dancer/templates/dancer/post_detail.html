@@ -1,0 +1,32 @@
+{% extends "dancer/layout.html" %}
+{% block content %}
+    <h2>{{ post.team_name }}</h2>
+    <p>
+    태그:
+    {% for tag in tag_list %}
+        <a href="{% url "dancer:tag_detail" tag.name%}" class="badge bg-success">
+        {{ tag.name }}
+        </a>
+    {% endfor %}
+    </p>
+    <img src="{{ post.photo.url }}" alt="{{ post.team_name }}"/>
+    <h2>{{ post.team_name }}</h2>
+    <ul>
+        <li>{{ post.member }}</li>
+    </ul>
+    {{ post.content|linebreaks }}
+
+        <h5>Comment</h5>
+    <ul>
+        {% for comment in comment_list %}
+            <li>
+                {{ comment.message }}
+                by {{ comment.author_name }}
+            </li>
+
+        {% endfor %}
+    </ul>
+
+    <hr />
+    <a href="/dancer/" class="btn btn-primary">목록으로</a>
+{% endblock %}

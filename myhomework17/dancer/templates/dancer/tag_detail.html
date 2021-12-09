@@ -1,0 +1,14 @@
+{% extends "dancer/layout.html" %}
+{% block content %}
+    <h2>{{ tag_name }}</h2>
+    <div>
+        {%  for post in post_list %}
+        <div>
+            <a href="{%  url "dancer:post_detail" post.pk %}">
+                {{ post.team_name }}
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

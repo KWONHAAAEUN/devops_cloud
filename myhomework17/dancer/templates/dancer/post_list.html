@@ -1,0 +1,25 @@
+{% extends "dancer/layout.html" %}
+{% block content %}
+    <div style="text-align: right;">
+    <form action="" method="get">
+        <input type="text" name="query" value="{{ request.GET.query }}"/>
+        <input type="submit" value="Search" />
+    </form> </div>
+
+            <div class="row" style="margin-top: 1em";>
+            {% for post in post_list %}
+                <div class="col-sm-6 offset-sm-3" style="margin-top: 1em;">
+
+
+                        <div class="card">
+                                <img src="{{ post.photo.url }}"
+                                    alt="{{ post.team_name }}"/>
+                                {{ post.team_name }}
+                            <div class="card-body">
+                            <h5 class="card-title" style="text-align: center;">{{ post.title }}</h5>
+                                {{ post.content|truncatewords:20 }}
+                                <a href="{% url "dancer:post_detail" post.pk %}" class="btn btn-sm bg-secondary">상세정보</a>
+                            </div></div></div>
+            {% endfor %}
+            </div></div>
+{% endblock %}
