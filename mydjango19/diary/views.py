@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect
 from diary.forms import PostForm
 from diary.models import Post
 
+from django.contrib import messages
+
 def tag_detail(request: HttpRequest, tag_name:str)->HttpResponse:
     qs=Post.objects.all()
     qs=qs.filter(tag_set__name=tag_name)
@@ -39,6 +41,7 @@ def post_new(request: HttpRequest) -> HttpResponse:
             post=form.save(commit=False)
             post.ip=request.META["REMOTE_ADDR"]
             post.save()
+            messages.success(request,"성공적으로 저장했습니다.")
             return redirect("diary:post_list")
     else:
         form=PostForm()
@@ -54,6 +57,7 @@ def post_edit(request: HttpRequest, pk:int) -> HttpResponse:
         form=PostForm(request.POST,request.FILES,instance=post)
         if form.is_valid():
             form.save()
+            messages.success(request,"성공적으로 수정했습니다")
             return redirect("diary:post_list")
     else:
         form=PostForm(instance=post)

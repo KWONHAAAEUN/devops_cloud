@@ -31,8 +31,16 @@
         <li class="nav-item"><a href="#" class="nav-link">About</a></li>
       </ul>
     </header>
-        {% block content %}
+        {% if messages %}
+            {% for message in messages  %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message.tags }}
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
 
+        {% block content %}
         {% endblock %}
 <hr />
 &copy; 하웅이 컴퍼니
