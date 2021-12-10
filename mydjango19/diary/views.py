@@ -1,8 +1,8 @@
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, redirect
+from django.http import HttpRequest, HttpResponse, Http404
+from django.shortcuts import render, redirect, get_object_or_404
 
-from diary.forms import PostForm
-from diary.models import Post
+from diary.forms import PostForm, CommentForm
+from diary.models import Post, Comment
 
 from django.contrib import messages
 
@@ -25,7 +25,12 @@ def post_list(request: HttpRequest)->HttpResponse:
     })
 
 def post_detail(request:HttpRequest, pk:int) -> HttpResponse:
-    post=Post.objects.get(pk=pk)
+    post=get_object_or_404(Post, pk=pk)
+    # try:
+    #     post=Post.objects.get(pk=pk)
+    # except Post.DoesNotExist:
+    #     raise Http404 # 예외는 return이 아니라 raise로 해야함
+
     comment_list=post.comment_set.all()
     tag_list=post.tag_set.all()
     return render(request,"diary/post_detail.html",{
@@ -35,9 +40,17 @@ def post_detail(request:HttpRequest, pk:int) -> HttpResponse:
     })
 
 def post_new(request: HttpRequest) -> HttpResponse:
+    # if request.method == "GET" # 빈서식
+    #     form=PostForm()
+    # else: # 입력 값을 전달받아 유효성 검사->저장
+    #     form = PostForm(request.POST,request.FILES)
+
+    # form.save(!!!2 전체 작성 후 commit=False)
+    # !!!2 post.ip=request.META["REMOTE_ADDR"]
     if request.method=="POST":
         form=PostForm(request.POST,request.FILES)
-        if form.is_valid():
+        if form.is_valid(): # 관심있어하는 모든 것의 유효성을 검사하는데 하나라도 실패시 실패
+            # form.cleaned.data
             post=form.save(commit=False)
             post.ip=request.META["REMOTE_ADDR"]
             post.save()
@@ -64,4 +77,30 @@ def post_edit(request: HttpRequest, pk:int) -> HttpResponse:
 
     return render(request, "diary/post_form.html", {
         "form": form,
+    })
+
+# /diary/100/comments/new/
+def comment_new(request, post_pk:int)->HttpResponse:
+    post=Post.objects.get(pk=post_pk)
+    if request.method == "POST":
+        form=CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            # form.cleaned_data # 유효성 검사에 통과한 값을 dict
+            comment=form.save(commit=False)
+            # comment.post_id=post_pk #FK를 직접 채우진 않는다
+            comment.post=post
+            comment.save()
+            return redirect("diary:post_detail",post_pk)
+    else:
+        form=CommentForm()
+    return render(request,"diary/comment_form.html",{
+        "form":form,
+    })
+# /diary/100/comments/20/edit/
+# pk는 수정할 인자=2번째 인자
+def comment_edit(request, post_pk:int, pk:int)->HttpResponse:
+    comment=get_object_or_404(Comment,pk=pk)
+    form=CommentForm(instance=comment)
+    return render(request,"diary/comment_form.html",{
+        "form":form,
     })

@@ -10,7 +10,7 @@ from django.core.validators import RegexValidator
 #         ]
 #     )
 #
-from diary.models import Post
+from diary.models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
@@ -25,3 +25,8 @@ class PostForm(forms.ModelForm):
             "photo",
             "tag_set",
         ]
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model=Comment
+        fields=["author_name","message"]
