@@ -6,7 +6,7 @@ from car.models import Shop
 
 def shop_list(request:HttpRequest)->HttpResponse:
     qs=Shop.objects.all()
-    return render(request,"car/post_list.html",{
+    return render(request,"car/shop_list.html",{
         "shop_list":qs,
     })
 

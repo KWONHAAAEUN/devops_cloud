@@ -1,0 +1,9 @@
+{% extends "car/layout.html" %}
+{% block content %}
+    {% for shop in shop_list %}
+        <img src="{{ shop.photo.url }}"
+             alt="{{ shop.name }}"/>
+        {{ shop.name }}
+    <a href="{% url "car:shop_detail" post.pk %}" class="btn btn-sm bg-secondary">상세보기</a>
+    {% endfor %}
+{% endblock %}

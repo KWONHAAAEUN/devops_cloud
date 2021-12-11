@@ -1,0 +1,14 @@
+{% extends "car/layout.html" %}
+{% block content %}
+    <img src="{{ shop.photo.url }}"
+         alt="{{ shop.name }}"/>
+    <h2>{{ shop.name }}</h2>
+    <ul>
+        <li>{{ shop.name }}</li>
+        <li>{{ shop.type }}</li>
+        <li>{{ shop.cost }}</li>
+    </ul>
+    {{ shop.option|linebreaks }}
+    <hr />
+    <a href="/car/" class="btn bg-secondary">목록으로</a>
+{% endblock %}
