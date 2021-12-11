@@ -1,9 +1,13 @@
 {% extends "car/layout.html" %}
 {% block content %}
+    <form action="" method="get">
+        <input type="text" name="query" value="{{ request.GET.query }}"/>
+        <input type="submit" value="Search"/>
+    </form>
     {% for shop in shop_list %}
         <img src="{{ shop.photo.url }}"
              alt="{{ shop.name }}"/>
         {{ shop.name }}
-    <a href="{% url "car:shop_detail" post.pk %}" class="btn btn-sm bg-secondary">상세보기</a>
+    <a href="{% url "car:shop_detail" shop.pk %}" class="btn btn-sm bg-secondary">상세보기</a>
     {% endfor %}
 {% endblock %}
