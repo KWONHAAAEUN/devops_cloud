@@ -20,11 +20,17 @@
     {{ shop.option|linebreaks }}
 
     <h3>Review</h3>
+    <a href="{% url "car:review_new" shop.pk %}">댓글 작성</a>
     <ul>
         {% for review in review_list %}
             <li>
                 {{ review.message }}
                 by {{ review.author_name }}
+                at
+                <span title="{{ review.created_at }}">
+                    {{ review.created_at|timesince }}전
+                </span>
+                <a href="{% url "car:review_edit" shop.pk review.pk %}">Edit</a>
             </li>
         {% endfor %}
     </ul>
