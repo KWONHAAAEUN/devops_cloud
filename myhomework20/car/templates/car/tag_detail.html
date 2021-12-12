@@ -2,12 +2,12 @@
 {% block content %}
     <h2>{{ tag_name }}</h2>
     <div>
-        {% for shop in shop_list %}
-            <div>
-                <a href="{% url "car:shop_detail" shop.pk %}">
-                    {{ shop.name }}
-                </a>
-            </div>
+        {%  for shop in shop_list %}
+        <div>
+            <a href="{%  url "car:shop_detail" shop.pk %}">
+                {{ shop.name }}
+            </a>
+        </div>
         {% endfor %}
     </div>
 {% endblock %}
