@@ -35,5 +35,6 @@
         {% endfor %}
     </ul>
     <hr />
-    <a href="/car/" class="btn bg-secondary">목록으로</a>
+    <a href="{% url "car:shop_list" %}" class="btn bg-secondary">목록으로</a>
+    <a href="{% url "car:shop_edit" shop.pk %}" class="btn bg-secondary">Edit</a>
 {% endblock %}

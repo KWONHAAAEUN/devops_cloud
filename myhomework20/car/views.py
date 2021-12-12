@@ -1,7 +1,8 @@
+from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 
-from car.forms import ReviewForm
+from car.forms import ReviewForm, ShopForm
 from car.models import Shop, Review
 
 
@@ -59,4 +60,36 @@ def review_edit(request, shop_pk:int, pk:int)->HttpResponse:
     return render(request,"car/review_form.html",{
         "form":form,
     })
+
+def shop_new(request:HttpRequest)->HttpResponse:
+    if request.method=="POST":
+        form=ShopForm(request.POST,request.FILES)
+        if form.is_valid():
+            shop=form.save(commit=False)
+            shop.save()
+            messages.success(request,"성공적으로 저장했습니다")
+            return redirect("car:shop_list")
+    else:
+        form=ShopForm()
+
+    return render(request,"car/shop_form.html",{
+        "form":form,
+        })
+
+def shop_edit(request:HttpRequest,pk:int)->HttpResponse:
+    shop=get_object_or_404(Shop,pk=pk)
+    if request.method=="POST":
+        form=ShopForm(request.POST,request.FILES,instance=shop)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"성공적으로 수정했습니다")
+            return redirect("car:shop_list")
+    else:
+        form=ShopForm(instance=shop)
+
+    return render(request,"car/shop_form.html",{
+        "form":form,
+    })
+
+
 

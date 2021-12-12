@@ -10,4 +10,8 @@
         {{ shop.name }}
     <a href="{% url "car:shop_detail" shop.pk %}" class="btn btn-sm bg-secondary">상세보기</a>
     {% endfor %}
+    <hr />
+    <a href="{% url "car:shop_new"%}" calss="btn btn-primary">
+    포스팅 작성
+    </a>
 {% endblock %}
