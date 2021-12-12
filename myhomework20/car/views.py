@@ -30,7 +30,7 @@ def tag_detail(request:HttpRequest,tag_name:str)->HttpResponse:
     qs=qs.filter(tag_set__name=tag_name)
     return render(request,"car/tag_detail.html",{
         "tag_name": tag_name,
-        "post_list":qs,
+        "shop_list":qs,
     })
 
 def review_new(request, shop_pk:int)->HttpResponse:

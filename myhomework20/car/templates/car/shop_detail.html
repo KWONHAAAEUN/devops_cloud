@@ -1,10 +1,11 @@
 {% extends "car/layout.html" %}
 {% block content %}
+    <div class="text-white">
     <h2>{{ shop.name }}</h2>
     <p>
         Tag:
         {% for tag in tag_list %}
-            <a href="{% url "car:tag_detail" tag.name %}" class="badge bg-success">
+            <a href="{% url "car:tag_detail" tag.name %}" class="badge bg-secondary">
                 {{ tag.name }}
             </a>
         {% endfor %}
@@ -13,14 +14,13 @@
          alt="{{ shop.name }}"/>
     <h2>{{ shop.name }}</h2>
     <ul>
-        <li>{{ shop.name }}</li>
         <li>{{ shop.type }}</li>
         <li>{{ shop.cost }}</li>
     </ul>
     {{ shop.option|linebreaks }}
 
     <h3>Review</h3>
-    <a href="{% url "car:review_new" shop.pk %}">댓글 작성</a>
+    <a href="{% url "car:review_new" shop.pk %}">write a review</a>
     <ul>
         {% for review in review_list %}
             <li>
@@ -30,11 +30,11 @@
                 <span title="{{ review.created_at }}">
                     {{ review.created_at|timesince }}전
                 </span>
-                <a href="{% url "car:review_edit" shop.pk review.pk %}">Edit</a>
+                <a href="{% url "car:review_edit" shop.pk review.pk %}">edit</a>
             </li>
         {% endfor %}
     </ul>
     <hr />
-    <a href="{% url "car:shop_list" %}" class="btn bg-secondary">목록으로</a>
-    <a href="{% url "car:shop_edit" shop.pk %}" class="btn bg-secondary">Edit</a>
-{% endblock %}
+    <a href="{% url "car:shop_list" %}" class="btn bg-secondary">back</a>
+    <a href="{% url "car:shop_edit" shop.pk %}" class="btn bg-secondary">post edit</a>
+{% endblock %}</div>

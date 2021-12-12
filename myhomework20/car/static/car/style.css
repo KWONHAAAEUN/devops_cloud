@@ -1,0 +1,16 @@
+*{
+    margin:0; padding:0;
+    box-sizing:border-box;
+}
+
+header{
+    position: fixed;
+    background-color: black;
+    width: 100%;
+    padding: 30px;
+    z-index: 9999;
+}
+
+main{
+    padding: 100px 0;
+}
