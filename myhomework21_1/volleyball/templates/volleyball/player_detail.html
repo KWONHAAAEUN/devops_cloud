@@ -1,0 +1,19 @@
+{% extends "volleyball/layout.html" %}
+{% block content %}
+    <h2>{{ player.name }}</h2>
+{#    <p>#}
+{#        {% for tag in shop.tag_set.all %}#}
+{#            <span class="badge bg-success">{{ tag.name }}</span>#}
+{#        {% endfor %}#}
+{#    </p>#}
+    <img src="{{ player.photo.url }}"
+         alt="{{ player.name }}"/>
+    <h2>{{ player.name }}</h2>
+    <ul>
+        <li>{{ player.team }}</li>
+        <li>{{ player.position }}</li>
+    </ul>
+    {{ player.description|linebreaks }}
+    <hr />
+    <a href="{% url "volleyball:player_list" %}" class="btn bg-primary">목록으로</a>
+{% endblock %}
