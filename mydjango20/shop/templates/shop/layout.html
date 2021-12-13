@@ -12,12 +12,13 @@
     {% bootstrap_javascript %}
 </head>
 <body>
-    {% bootstrap_messages %}
-    <h1>배달의 기수</h1>
-    {% block content %}
-
-    {% endblock %}
-<hr />
-&copy; 2021 권하은 컴퍼니
+    <div class="container">
+        {% bootstrap_messages %}
+        <h1>배달의 기수</h1>
+        {% block content %}
+        {% endblock %}
+        <hr />
+        &copy; 2021 권하은 컴퍼니
+    </div>
 </body>
 </html>

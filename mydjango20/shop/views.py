@@ -20,7 +20,7 @@ def shop_list(request: HttpRequest)->HttpResponse: # 장고가 뷰 함수에게 
         qs=qs.filter(name__icontains=query)
 
     return render(request,"shop/shop_list.html",{
-        "cateory_list":category_qs,
+        "category_list":category_qs,
         "shop_list":qs, # qs를 shop_list안에 있는 것으로 사용
     })
 
