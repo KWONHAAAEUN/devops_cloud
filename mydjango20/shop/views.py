@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 # /shop/new/
 from shop.forms import ShopForm
-from shop.models import Shop, Category
+from shop.models import Shop, Category, Tag
 
 
 def shop_list(request: HttpRequest)->HttpResponse: # 장고가 뷰 함수에게 요구하는 형태
@@ -32,8 +32,20 @@ def shop_new(request: HttpRequest)->HttpResponse:
         form=ShopForm(request.POST,request.FILES)
         if form.is_valid():
             saved_post=form.save()
+
+            tag_list=[]
+            # 유효성 검사에 통과한 값들이 들어옴
+            tags=form.cleaned_data.get("tags","")
+            for word in tags.split(","):
+                tag_name=word.strip()
+                tag, __ =Tag.objects.get_or_create(name=tag_name) # 태그가 있으면 가져오고 없으면 생성해서 가져옴
+                tag_list.append(tag)
+
+            saved_post.tag_set.clear() # 간단 구현을 위해 clear 호출
+            saved_post.tag_set.add(*tag_list)
+
             # shop_detail 뷰를 구현했을 경우
-            return redirect("shop:shop_detail", saved_post.pk)
+        return redirect("shop:shop_detail", saved_post.pk)
     else:
         form=ShopForm()
     return render(request,"shop/shop_form.html",{
