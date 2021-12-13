@@ -15,5 +15,6 @@
     </ul>
     {{ player.description|linebreaks }}
     <hr />
+    <a href="{% url "volleyball:player_edit" player.pk %}" class="btn bg-primary">게시글 수정</a>
     <a href="{% url "volleyball:player_list" %}" class="btn bg-primary">목록으로</a>
 {% endblock %}
