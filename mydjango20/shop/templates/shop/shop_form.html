@@ -1,0 +1,12 @@
+{% extends "shop/layout.html" %}
+
+{% block content %}
+    <h2>Shop Form</h2>
+    <form action="" method="post" enctype="multipart/form-data"> <!-- form을 사용해야 브라우저가 지정 서버로 값 전달 가능 -->
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="저장하기"/>
+    </form>
+{% endblock %}
