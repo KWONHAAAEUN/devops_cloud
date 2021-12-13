@@ -15,6 +15,9 @@ class Category(TimestampedModel):
     def __str__(self) -> str:
         return self.name
 
+    class Meta:
+        ordering=["-id"]
+
 class Shop(TimestampedModel):
     category=models.ForeignKey(Category, on_delete=models.CASCADE)
     name=models.CharField(max_length=100,db_index=True)
@@ -29,14 +32,23 @@ class Shop(TimestampedModel):
     def __str__(self)->str:
         return self.name
 
+    class Meta:
+        ordering=["-id"] # id 필드에 대해 내림차순
+
 class Review(TimestampedModel):
     shop=models.ForeignKey(Shop,on_delete=models.CASCADE) #1:N # 하나의 shop이 삭제되면 그 안에 리뷰들 삭제
     author_name=models.CharField(max_length=20)
     message=models.TextField()
+
+    class Meta:
+        ordering=["-id"]
 
 class Tag(TimestampedModel):
     name=models.CharField(max_length=100, unique=True) # 유일성 옵션
 
     def __str__(self)->str:
         return self.name
+
+    class Meta:
+        ordering=["-id"]
 

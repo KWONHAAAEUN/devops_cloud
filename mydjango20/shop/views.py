@@ -6,6 +6,18 @@ from shop.forms import ShopForm
 from shop.models import Shop
 
 
+def shop_list(request: HttpRequest)->HttpResponse: # 장고가 뷰 함수에게 요구하는 형태
+    qs=Shop.objects.all()# .order_by("-id") # -id 역순 정렬
+
+    query=request.GET.get("query","") # query값을 가져오고 없으면 빈문자열
+    if query:
+        qs=qs.filter(name__icontains=query)
+
+    return render(request,"shop/shop_list.html",{
+       "shop_list":qs, # qs를 shop_list안에 있는 것으로 사용
+    })
+
+
 def shop_new(request: HttpRequest)->HttpResponse:
     # raise NotImplementedError("곧 구현 예정")
 

@@ -1,0 +1,16 @@
+{% extends "shop/layout.html" %}
+{% block content %}
+    <h2>Shop List</h2>
+
+    <form action="" method="get">
+        <input type="text" name="query" placeholder="검색어를 입력해주세요" value="{{ request.GET.query }}"/>
+        <input type="submit" value="검색"/>
+    </form>
+    <ul>
+    {% for shop in shop_list %}
+        <li>
+        {{ shop.name }}
+        </ul>
+    {% endfor %}
+    </ul>
+{% endblock %}
