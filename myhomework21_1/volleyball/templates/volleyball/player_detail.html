@@ -1,11 +1,11 @@
 {% extends "volleyball/layout.html" %}
 {% block content %}
     <h2>{{ player.name }}</h2>
-{#    <p>#}
-{#        {% for tag in shop.tag_set.all %}#}
-{#            <span class="badge bg-success">{{ tag.name }}</span>#}
-{#        {% endfor %}#}
-{#    </p>#}
+    <p>
+        {% for tag in player.tag_set.all %}
+            <span class="badge bg-success">{{ tag.name }}</span>
+        {% endfor %}
+    </p>
     <img src="{{ player.photo.url }}"
          alt="{{ player.name }}"/>
     <h2>{{ player.name }}</h2>
