@@ -1,5 +1,5 @@
 from django import forms
-from volleyball.models import Player, Tag
+from volleyball.models import Player, Tag, Comment
 
 
 class PlayerForm(forms.ModelForm):
@@ -40,5 +40,9 @@ class PlayerForm(forms.ModelForm):
             "team",
             "position",
             "description",
-            "tag_set",
         ]
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model=Comment
+        fields=["author_name","message"]

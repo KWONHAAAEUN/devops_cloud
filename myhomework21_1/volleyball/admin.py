@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from volleyball.models import Category, Player, Tag
+from volleyball.models import Category, Player, Tag, Comment
 
 
 @admin.register(Category)
@@ -13,4 +13,8 @@ class PlayerAdmin(admin.ModelAdmin):
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
     pass

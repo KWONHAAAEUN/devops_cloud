@@ -15,6 +15,21 @@
     </ul>
     {{ player.description|linebreaks }}
     <hr />
+    <h3>Comment</h3>
+    <a href="{% url "volleyball:comment_new" player.pk %}">댓글 작성</a>
+        <ul>
+            {% for comment in comment_list %}
+                <li>
+                    {{ comment.message }}
+                    by {{ comment.author_name }}
+                    at
+                    <span title="{{ comment.created_at }}">
+                        {{ comment.created_at|timesince }}전
+                    </span>
+                    <a href="{% url "volleyball:comment_edit" player.pk comment.pk %}">수정</a>
+                </li>
+            {% endfor %}
+        </ul>
     <a href="{% url "volleyball:player_edit" player.pk %}" class="btn bg-primary">게시글 수정</a>
     <a href="{% url "volleyball:player_list" %}" class="btn bg-primary">목록으로</a>
 {% endblock %}

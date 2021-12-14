@@ -33,3 +33,11 @@ class Tag(models.Model):
     class Meta:
         ordering=["-name"]
 
+class Comment(models.Model):
+    player=models.ForeignKey(Player,on_delete=models.CASCADE)
+    author_name=models.CharField(max_length=20)
+    message=models.TextField()
+
+    def __str__(self)->str:
+        return self.author_name
+
