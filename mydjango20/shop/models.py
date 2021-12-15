@@ -33,7 +33,7 @@ class Shop(TimestampedModel):
         return self.name
 
     class Meta:
-        ordering=["-id"] # id 필드에 대해 내림차순
+        ordering=["-name"] # id 필드에 대해 내림차순
 
 class Review(TimestampedModel):
     shop=models.ForeignKey(Shop,on_delete=models.CASCADE) #1:N # 하나의 shop이 삭제되면 그 안에 리뷰들 삭제

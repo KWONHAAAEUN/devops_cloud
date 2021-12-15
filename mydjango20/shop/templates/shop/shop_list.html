@@ -7,12 +7,15 @@
             <ul>
                 {% for shop in shop_list %}
                     <li>
-                        {{ shop.name }}
+                        <a href="{% url "shop:shop_detail" shop.pk %}">{{ shop.name }}</a>
                     </li>
                 {% endfor %}
             </ul>
         </div>
         <div class="col-sm-4">
+        <dvi class="d-grid mb-3">
+            <a href="{% url "shop:shop_new" %}" class="btn btn-primary">새 포스팅 쓰기</a>
+        </dvi>
             <form action="" method="get">
                 <input type="text"
                        name="query"

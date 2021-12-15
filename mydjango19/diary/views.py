@@ -65,7 +65,8 @@ def post_new(request: HttpRequest) -> HttpResponse:
 
 def post_edit(request: HttpRequest, pk:int) -> HttpResponse:
     # 아래 코드는 ModelForm에 한해서 동작하는 코드
-    post=Post.objects.get(pk=pk)
+    #post=Post.objects.get(pk=pk)
+    post=get_object_or_404(Post,pk=pk)
     if request.method=="POST":
         form=PostForm(request.POST,request.FILES,instance=post)
         if form.is_valid():

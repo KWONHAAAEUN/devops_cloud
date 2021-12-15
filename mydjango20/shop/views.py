@@ -31,19 +31,7 @@ def shop_new(request: HttpRequest)->HttpResponse:
     if request.method == "POST":
         form=ShopForm(request.POST,request.FILES)
         if form.is_valid():
-            saved_post=form.save()
-
-            tag_list=[]
-            # 유효성 검사에 통과한 값들이 들어옴
-            tags=form.cleaned_data.get("tags","")
-            for word in tags.split(","):
-                tag_name=word.strip()
-                tag, __ =Tag.objects.get_or_create(name=tag_name) # 태그가 있으면 가져오고 없으면 생성해서 가져옴
-                tag_list.append(tag)
-
-            saved_post.tag_set.clear() # 간단 구현을 위해 clear 호출
-            saved_post.tag_set.add(*tag_list)
-
+            saved_post = form.save()
             # shop_detail 뷰를 구현했을 경우
         return redirect("shop:shop_detail", saved_post.pk)
     else:
@@ -57,4 +45,18 @@ def shop_detail(request:HttpRequest,pk:int)->HttpResponse:
     shop=get_object_or_404(Shop,pk=pk)
     return  render(request,"shop/shop_detail.html",{
         "shop":shop,
+    })
+
+def shop_edit(request: HttpRequest, pk:int)->HttpResponse:
+    shop=get_object_or_404(Shop,pk=pk)
+
+    if request.method=="POST":
+        form=ShopForm(request.POST, request.FILES, instance=shop)
+        if form.is_valid():
+            saved_shop = form.save()
+            return redirect("shop:shop_detail",saved_shop.pk)
+    else:
+        form=ShopForm(instance=shop)
+    return render(request,"shop/shop_form.html",{
+        "form":form,
     })
