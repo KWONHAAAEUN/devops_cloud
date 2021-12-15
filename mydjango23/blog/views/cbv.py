@@ -34,4 +34,5 @@ post_edit=UpdateView.as_view(
 )
 post_delete=DeleteView.as_view(
     model=Post,
+    success_url=reverse_lazy("blog:post_list"),
 )
