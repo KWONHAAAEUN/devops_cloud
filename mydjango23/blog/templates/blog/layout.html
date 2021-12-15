@@ -9,6 +9,12 @@
 </head>
 <body>
     <h1>권하은의 블로그</h1>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
     {% block content %}
 
     {% endblock %}
