@@ -5,9 +5,9 @@ from star import views
 app_name="star"
 
 urlpatterns=[
-    path('',views.post_list,name="post_list"),
-    path('<int:pk>',views.post_detail,name="post_detail"),
-    path('new/',views.post_new,name="post_new"),
-    path('<int:pk>/edit/', views.post_edit, name='post_edit'),
-    path('<int:pk>/delete/', views.post_delete, name='post_delete'),
+    path('',views.kirby_list,name="kirby_list"),
+    path('<int:pk>',views.kirby_detail,name="kirby_detail"),
+    path('new/',views.kirby_new,name="kirby_new"),
+    path('<int:pk>/edit/', views.kirby_edit, name='kirby_edit'),
+    path('<int:pk>/delete/', views.kirby_delete, name='kirby_delete'),
 ]

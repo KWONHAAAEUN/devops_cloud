@@ -1,0 +1,9 @@
+{% extends "star/layout.html" %}
+{% block content %}
+<h2>Kirby</h2>
+    {% for kirby in kirby_list %}
+        <img src="{{ kirby.photo.url }}"
+             alt="{{ kirby.title }}"/>
+            <a href="{% url "star:kirby_detail" kirby.pk %}">{{ kirby.title }}</a>
+    {% endfor %}
+{% endblock %}
