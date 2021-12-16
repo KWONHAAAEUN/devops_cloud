@@ -17,6 +17,7 @@ class Category(TimestampedModel):
         ordering = ["name"]
 
 class Kirby(TimestampedModel):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title=models.CharField(max_length=30,db_index=True)
     photo=models.ImageField(upload_to="star/kirby/%Y/%m/%d")
     day=models.DateField()
