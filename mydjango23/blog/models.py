@@ -1,3 +1,5 @@
+import tablib
+from django.core.validators import RegexValidator
 from django.db import models
 from django.urls import reverse
 
@@ -44,6 +46,21 @@ class Post(TimestampedModel):
     def get_absolute_url(self)->str:
         return reverse("blog:post_detail",args=[self.pk])
 
+    @classmethod
+    def get_tabular_data(cls,queryset,format="xlsx")->bytes: # cls는 변수명
+        dataset=tablib.Dataset()
+        dataset.headers=["id","title","created_at","updated_at"]
+
+        for post in queryset:
+            dataset.append(
+                [
+                    post.id,
+                    post.title,
+                    post.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+                    post.updated_at.strftime("%Y-%m-%d %H:%M:%S"),
+                ]
+            )
+        return dataset.export(format)
     class Meta:
         ordering = ['-id']
 
@@ -67,3 +84,9 @@ class Tag(TimestampedModel):
 
     class Meta:
         ordering = ["name"]
+
+class Subscriber(TimestampedModel):
+    phone=models.CharField(max_length=15,
+                           validators=[
+                               RegexValidator(r"^\d{3,4}-?\d{3,4}-?\d{4}$"),
+                           ],)

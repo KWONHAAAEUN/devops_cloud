@@ -1,5 +1,10 @@
 {% extends "blog/layout.html" %}
 
+<!-- 부모의 것도 받고 싶어 block.super-->
+{% block page_title %}
+    {{ block.super }}
+    ::{{ post.title }}
+{% endblock %}
 {% block content %}
     <h2>{{ post.title }}</h2>
 

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from blog.models import Category, Post, Tag, Comment
+from blog.models import Category, Post, Tag, Comment, Subscriber
 
 
 @admin.register(Category)
@@ -17,4 +17,8 @@ class TagAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Subscriber)
+class SubscriberAdmin(admin.ModelAdmin):
     pass
