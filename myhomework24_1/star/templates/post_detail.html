@@ -1,0 +1,26 @@
+{% extends "star/layout.html" %}
+
+{% block content %}
+    <h2>{{ kirby.title }}</h2>
+
+    <p>
+        {% for tag in post.tag_set.all %}
+            {{ tag.name }}
+        {% endfor %}
+    </p>
+
+    <img src="{{ kirby.photo.url }}" alt="{{ kirby.title }}">
+
+    {{ kirby.story|linebreaks }}
+
+    <hr />
+    <a href="{% url "star:post_list"%}">
+        포스팅 목록
+    </a>
+    <a href="{% url "star:post_edit" kirby.pk %}">
+        포스팅 수정
+    </a>
+    <a href="{% url "star:post_delete" kirby.pk %}">
+        포스팅 삭제
+    </a>
+{% endblock %}
