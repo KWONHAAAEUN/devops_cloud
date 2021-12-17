@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from shop.forms import ReviewForm
 from shop.models import Shop, Category, Review
@@ -28,8 +28,7 @@ shop_detail = DetailView.as_view(
 class ReviewCreateView(LoginRequiredMixin, CreateView):
     model = Review
     form_class = ReviewForm
-    # FIXME: shop_detail로 이동
-    success_url = reverse_lazy("shop:shop_list")
+    # success_url = reverse_lazy("shop:shop_list")
 
     # 유효성 검사에 통과한다면 ..
     def form_valid(self, form) -> HttpResponse:
@@ -44,5 +43,10 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
         # return redirect("shop:shop_detail",shop.pk)
         return redirect(shop)
 
-
 review_new = ReviewCreateView.as_view()
+
+review_edit=UpdateView.as_view(
+    model=Review,
+    form_class=ReviewForm,
+    success_url = reverse_lazy("shop:shop_list")
+)
