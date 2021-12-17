@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap5',
     'shop',
-    'accouts',
+    'accounts',
 ]
 if DEBUG:
     INSTALLED_APPS += [
