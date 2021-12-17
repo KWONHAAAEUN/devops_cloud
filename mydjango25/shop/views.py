@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
@@ -29,6 +29,9 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
     model = Review
     form_class = ReviewForm
     # success_url = reverse_lazy("shop:shop_list")
+    # 위 코드를 주석처리 한 이유는
+    # 아래 valid에서 super로 부모 호출을 사용하지 않고
+    # absolute url 설정해 준 것으로 return redirect(shop)를 받기 때문
 
     # 유효성 검사에 통과한다면 ..
     def form_valid(self, form) -> HttpResponse:
@@ -45,8 +48,16 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
 
 review_new = ReviewCreateView.as_view()
 
-review_edit=UpdateView.as_view(
-    model=Review,
-    form_class=ReviewForm,
+class ReviewUdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView): # 다중 상속
+    model=Review
+    form_class=ReviewForm
     success_url = reverse_lazy("shop:shop_list")
-)
+
+    # UserPassesTestMixin 부모 때문에 호출 가능
+    # 참이면 UserPassesTestMixin 거짓 UpdateView
+    # 유저가 같은지 테스트
+    def test_func(self):
+        review=self.get_object()
+        return self.request.user==review.user
+
+review_edit=ReviewUdateView.as_view()

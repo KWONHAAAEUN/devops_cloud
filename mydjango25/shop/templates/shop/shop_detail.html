@@ -24,7 +24,9 @@
             {{ review.message }}
             by {{ review.user }}
             at {{ review.created_at }}
+            {% if review.user == request.user %}
             <a href="{% url 'shop:review_edit' shop.pk review.pk %}">수정</a>
+            {% endif %}
         </div>
     {% empty %}
         등록된 리뷰가 없습니다
