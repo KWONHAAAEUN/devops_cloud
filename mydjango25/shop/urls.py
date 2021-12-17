@@ -1,3 +1,8 @@
 from django.urls import path
+from shop import views
 
-urlpatterns=[]
+app_name="shop"
+
+urlpatterns=[
+    path("", views.shop_list, name="shop_list")
+]
