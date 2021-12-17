@@ -1,10 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, resolve_url
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from shop.forms import ReviewForm
+from shop.mixins import ReviewUserCheckMixin
 from shop.models import Shop, Category, Review
 
 
@@ -48,16 +49,21 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
 
 review_new = ReviewCreateView.as_view()
 
-class ReviewUdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView): # 다중 상속
+class ReviewUdateView(LoginRequiredMixin, ReviewUserCheckMixin, UpdateView): # 다중 상속
     model=Review
     form_class=ReviewForm
-    success_url = reverse_lazy("shop:shop_list")
+    # success_url = reverse_lazy("shop:shop_list")
 
     # UserPassesTestMixin 부모 때문에 호출 가능
     # 참이면 UserPassesTestMixin 거짓 UpdateView
     # 유저가 같은지 테스트
-    def test_func(self):
-        review=self.get_object()
-        return self.request.user==review.user
+    # def test_func(self):
+    #     review=self.get_object()
+    #     return self.request.user==review.user
+
+    def get_success_url(self) -> str:
+        review=self.object
+        return resolve_url(review.shop)
+    # resolve_url의 리턴 값을 문자열이고 HttpResponse를 요구하면 redirect
 
 review_edit=ReviewUdateView.as_view()
