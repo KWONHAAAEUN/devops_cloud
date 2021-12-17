@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap5',
+    'shop',
 ]
 if DEBUG:
     INSTALLED_APPS += [
@@ -64,7 +65,9 @@ ROOT_URLCONF = 'mydjango25.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR/"mydjango25"/"templates",
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
