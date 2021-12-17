@@ -13,4 +13,19 @@
         <img src="{{ shop.photo.url }}" alt="{{ shop.name }}"/>
     {% endif %}
     {{ shop.description|default:"설명이 없습니다" }}
+
+    <hr />
+    <h3>리뷰</h3>
+
+    <a href="{% url 'shop:review_new' shop.pk %}">리뷰 작성</a>
+
+    {% for review in shop.review_set.all %}
+        <div>
+            {{ review.message }}
+            by {{ review.user }}
+            at {{ review.created_at }}
+        </div>
+    {% empty %}
+        등록된 리뷰가 없습니다
+    {% endfor %}
 {% endblock %}

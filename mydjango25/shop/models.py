@@ -1,5 +1,7 @@
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
+
 
 class TimestampedModel(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
@@ -28,6 +30,9 @@ class Shop(TimestampedModel):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse("shop:shop_detail", args=[self.pk])
 
     class Meta:
         ordering = ["-id"]
