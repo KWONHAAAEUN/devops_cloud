@@ -11,6 +11,8 @@ from shop.models import Shop, Category, Review
 
 class ShopListView(ListView):
     model = Shop
+    paginate_by = 2
+
 
     # 부모의 get context date를 불러와서 저장
     def get_context_data(self, **kwargs):
