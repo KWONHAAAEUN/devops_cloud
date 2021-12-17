@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 
 class TimestampedModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -22,15 +24,20 @@ class Kirby(TimestampedModel):
     photo=models.ImageField(upload_to="star/kirby/%Y/%m/%d")
     day=models.DateField()
     story=models.TextField(blank=True)
+    tag_set = models.ManyToManyField('Tag', blank=True)
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self)->str:
+        return reverse("star:kirby_detail",args=[self.pk])
 
     class Meta:
         ordering = ['title']
 
 class Review(TimestampedModel):
     kirby = models.ForeignKey(Kirby, on_delete=models.CASCADE)
+    author_name=models.CharField(max_length=20)
     message = models.TextField()
 
     def __str__(self):

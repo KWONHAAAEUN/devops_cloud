@@ -39,9 +39,11 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
     # 유효성 검사에 통과한다면 ..
     def form_valid(self, form) -> HttpResponse:
         # self.kwargs:URL Captured 값들이 사전으로 저장
+        # DB 저장
         shop_pk = self.kwargs["shop_pk"]
         shop = get_object_or_404(Shop, pk=shop_pk)
 
+        # 연결 주소 설정해주기
         review = form.save(commit=False)
         review.shop = shop
         review.user = self.request.user
@@ -57,7 +59,8 @@ class ReviewUdateView(LoginRequiredMixin, ReviewUserCheckMixin, UpdateView): # �
     # success_url = reverse_lazy("shop:shop_list")
 
     # UserPassesTestMixin 부모 때문에 호출 가능
-    # 참이면 UserPassesTestMixin 거짓 UpdateView
+
+    # 값이 참이면 출력해주고, 거짓이면 저리가라는 페이지를 줌
     # 유저가 같은지 테스트
     # def test_func(self):
     #     review=self.get_object()

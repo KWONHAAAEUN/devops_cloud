@@ -8,7 +8,7 @@ class CategoryAdmin(admin.ModelAdmin):
     pass
 
 @admin.register(Post)
-class PlayerAdmin(admin.ModelAdmin):
+class PostAdmin(admin.ModelAdmin):
     pass
 
 @admin.register(Tag)
