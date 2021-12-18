@@ -1,2 +1,9 @@
 from django.urls import path
-urlpatterns=[]
+
+from ani import views
+
+app_name="ani"
+
+urlpatterns=[
+    path("",views.ani_list,name="ani_list")
+]
