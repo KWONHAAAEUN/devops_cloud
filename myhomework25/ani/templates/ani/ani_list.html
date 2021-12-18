@@ -18,7 +18,9 @@
         <tbody>
             {% for ani in ani_list %}
                 <tr>
-                    <td>{{ ani }}</td>
+                    <td>
+                        <a href="{% url 'ani:ani_detail' ani.pk %}">
+                            {{ ani }}</a></td>
                     <td>{{ ani.created_at }}</td>
                 </tr>
             {% endfor %}

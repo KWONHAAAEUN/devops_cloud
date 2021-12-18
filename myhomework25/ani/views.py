@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from ani.models import Ani, Category
 
@@ -13,3 +13,7 @@ class AniListView(ListView):
         return context_date
 
 ani_list=AniListView.as_view()
+
+ani_detail=DetailView.as_view(
+    model=Ani,
+)

@@ -1,0 +1,15 @@
+{% extends "ani/layout.html" %}
+{% block content %}
+    <h2>{{ ani.name }}</h2>
+    <p>
+        {% for tan in ani.tag_set.all %}
+            {{ tag.name }}
+        {% empty %}
+            등록된 태그가 없습니다.
+        {% endfor %}
+    </p>
+    {% if ani.photo %}
+        <img src="{{ ani.photo.url }}" alt="{{ ani.name }}"/>
+    {% endif %}
+    {{ ani.description|default:"설명이 없습니다" }}
+{% endblock %}
