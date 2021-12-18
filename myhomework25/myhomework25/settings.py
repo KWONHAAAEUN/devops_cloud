@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap5',
+    'ani',
+    'accounts',
 ]
 
 if DEBUG:
@@ -66,7 +68,9 @@ ROOT_URLCONF = 'myhomework25.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR/"myhomework25"/"templates",
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
