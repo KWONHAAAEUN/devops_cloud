@@ -1,5 +1,12 @@
 {% extends "ani/layout.html" %}
 {% block content %}
+    <p>
+        {% for category in category_list %}
+            <span class="badge bg-info">
+                {{ category.name }}
+            </span>
+        {% endfor %}
+    </p>
     <table class="table table-bordered table-hover">
         <thead>
             <tr>

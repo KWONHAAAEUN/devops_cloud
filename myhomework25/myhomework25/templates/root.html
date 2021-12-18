@@ -1,6 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
-<p class="alert alert-info">
-welcome to kirby world!
-</p>
+    <p class="alert alert-info">
+    welcome to kirby world!
+    </p>
+    <ul>
+        <li><a href="{% url 'ani:ani_list' %}">캐릭터 리스트</a></li>
+    </ul>
 {% endblock %}
