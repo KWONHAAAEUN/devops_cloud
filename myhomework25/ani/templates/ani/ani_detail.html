@@ -12,4 +12,15 @@
         <img src="{{ ani.photo.url }}" alt="{{ ani.name }}"/>
     {% endif %}
     {{ ani.description|default:"설명이 없습니다" }}
+    <hr />
+    <h4>댓글</h4>
+    {% for comment in ani.comment_set.all %}
+        <div>
+            {{ comment.message }}
+            by {{ comment.user }}
+            at {{ comment.created_at }}
+        </div>
+    {% empty %}
+        등록된 댓글이 없습니다
+    {% endfor %}
 {% endblock %}
