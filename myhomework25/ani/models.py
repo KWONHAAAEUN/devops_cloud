@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 
 class TimestampedModel(models.Model):
     created_at=models.DateTimeField(auto_now_add=True)
@@ -32,6 +34,9 @@ class Ani(TimestampedModel):
         ordering=["name"]
         verbose_name="캐릭터"
         verbose_name_plural="캐릭터 이름들"
+
+    def get_absolute_url(self):
+        return reverse("ani:ani_detail",args=[self.pk])
 
 class Comment(TimestampedModel):
     ani=models.ForeignKey(Ani,on_delete=models.CASCADE)
