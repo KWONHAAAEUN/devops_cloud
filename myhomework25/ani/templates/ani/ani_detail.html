@@ -2,16 +2,20 @@
 {% block content %}
     <h2>{{ ani.name }}</h2>
     <p>
-        {% for tan in ani.tag_set.all %}
+        {% for tag in ani.tag_set.all %}
+            <div class="badge bg-success">
             {{ tag.name }}
+            </div>
         {% empty %}
             등록된 태그가 없습니다.
         {% endfor %}
+
     </p>
+    <div class="text-center">
     {% if ani.photo %}
-        <img src="{{ ani.photo.url }}" alt="{{ ani.name }}"/>
+        <img src="{{ ani.photo.url }}" alt="{{ ani.name }}"/></div>
     {% endif %}
-    {{ ani.description|default:"설명이 없습니다" }}
+    {{ ani.description|linebreaks|default:"설명이 없습니다" }}
     <hr />
     <h4>댓글</h4>
     <a href="{% url 'ani:comment_new' ani.pk %}">리뷰 작성</a>

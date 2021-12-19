@@ -1,6 +1,13 @@
 {% extends "ani/layout.html" %}
 {% load bootstrap5 %}
 {% block content %}
+    <form action="" method="get">
+        <input type="text"
+               name="query"
+               placeholder="검색할 캐릭터를 입력해주세요."
+               value="{{ request.GET.query }}"/>
+        <input type="submit" value="검색"/>
+    </form>
     <p>
         {% for category in category_list %}
             <span class="badge bg-info">

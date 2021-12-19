@@ -1,3 +1,4 @@
+
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect, resolve_url
@@ -12,6 +13,16 @@ from ani.models import Ani, Category, Comment
 class AniListView(ListView):
     model=Ani
     paginate_by=5
+
+    def get_queryset(self):
+        qs=super().get_queryset()
+
+        query=self.request.GET.get("query","")
+        if query:
+            qs=qs.filter(name__icontains=query)
+
+        return qs
+
     def get_context_data(self,**kwargs):
         context_date=super().get_context_data(**kwargs)
         context_date["category_list"]=Category.objects.all()
