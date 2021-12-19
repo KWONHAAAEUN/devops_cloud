@@ -27,5 +27,7 @@
             {% endfor %}
         </tbody>
     </table>
+    <hr />
+    <a href="{% url "ani:ani_new" %}">포스팅 작성</a>
     {% bootstrap_pagination page_obj %}
 {% endblock %}

@@ -1,10 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect, resolve_url
-from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.urls import reverse_lazy, reverse
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from ani.forms import CommentForm
+from ani.forms import CommentForm, AniForm
 from ani.mixins import CommentUserCheckMixin
 from ani.models import Ani, Category, Comment
 
@@ -56,3 +56,29 @@ class CommentUdateView(LoginRequiredMixin, CommentUserCheckMixin, UpdateView): #
         return resolve_url(comment.ani)
 
 comment_edit=CommentUdateView.as_view()
+
+comment_delete=DeleteView.as_view(
+    model=Ani,
+    success_url=reverse_lazy("ani:ani_list")
+)
+
+class AniCreateView(CreateView):
+    model = Ani
+    form_class=AniForm
+
+    def get_success_url(self):
+        ani_pk=self.object.pk
+        return reverse("ani:ani_detail",args=[ani_pk])
+
+ani_new=AniCreateView.as_view()
+
+
+class AniUpdateView(UpdateView):
+    model=Ani
+    form_class=AniForm
+ani_edit=AniUpdateView.as_view()
+
+ani_delete=DeleteView.as_view(
+    model=Ani,
+    success_url=reverse_lazy("ani:ani_list"),
+)

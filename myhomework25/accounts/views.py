@@ -16,7 +16,7 @@ login=LoginView.as_view(
 )
 
 profile=login_required(TemplateView.as_view(
-    template_name="accounts/profile.html"
+    template_name="accounts/profile.html",
 ))
 
 logout=LogoutView.as_view(

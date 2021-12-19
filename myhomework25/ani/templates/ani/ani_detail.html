@@ -27,4 +27,8 @@
     {% empty %}
         등록된 댓글이 없습니다
     {% endfor %}
+    <hr />
+    <a href="{% url 'ani:ani_edit' ani.pk %}">글 수정</a>
+    <a href="{% url 'ani:ani_list' %}">목록으로</a>
+    <a href="{% url 'ani:ani_delete' ani.pk %}">글 삭제</a>
 {% endblock %}
