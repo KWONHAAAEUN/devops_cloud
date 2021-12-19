@@ -11,7 +11,7 @@ from ani.models import Ani, Category, Comment
 
 class AniListView(ListView):
     model=Ani
-
+    paginate_by=5
     def get_context_data(self,**kwargs):
         context_date=super().get_context_data(**kwargs)
         context_date["category_list"]=Category.objects.all()
