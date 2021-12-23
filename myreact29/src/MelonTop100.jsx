@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import { Button as BootstrapButton } from 'react-bootstrap';
+import { Button as AntButton } from 'antd';
 import initialsongList from './data/melon_data.json';
 import './MelonTop100.css';
+
 // 전역 변수: 바뀌지 않는 데이터
 // initial로 초기값 설정
 
@@ -14,21 +17,24 @@ function MelonTop100() {
   return (
     <div>
       <h1>멜론 top 100</h1>
-      <button onClick={handleClick}>로딩</button>
+      <BootstrapButton variant="success" onClick={handleClick}>
+        로딩
+      </BootstrapButton>
+
+      <AntButton type="primary" onClick={handleClick}>
+        로딩
+      </AntButton>
       <ul className="songList">
         <ul>
           {songList.map((song) => {
             return (
-              <li>
+              <li key={song.song_no}>
                 {song.rank}
                 {song.title}
                 {song.like}
               </li>
             );
           })}
-          <li>제목1</li>
-          <li>제목2</li>
-          <li>제목3</li>
         </ul>
       </ul>
     </div>
