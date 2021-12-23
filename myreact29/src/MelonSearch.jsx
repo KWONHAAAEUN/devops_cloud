@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { List, Avatar } from 'antd';
 import Axios from 'axios';
 import jsonpAdapter from 'axios-jsonp';
+import { Tag } from 'antd';
 
 function MelonSearch() {
   const [query, setQuery] = useState('');
@@ -68,6 +69,8 @@ function MelonSearch() {
       {songList.map((song) => {
         return (
           <List
+            itemLayout="vertical"
+            size="large"
             itemLayout="horizontal"
             dataSource={data}
             renderItem={() => (
@@ -77,8 +80,11 @@ function MelonSearch() {
                   title={song.SONGNAME}
                   description={song.ARTISTNAME}
                 />
+                <Tag>{song.ALBUMNAME}</Tag>
               </List.Item>
             )}
+            itemLayout="vertical"
+            size="large"
           />
         );
       })}
