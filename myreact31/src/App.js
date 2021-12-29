@@ -1,37 +1,52 @@
 import PageLotto from "./pages/PageLotto";
 // import ProfileCard from "./pages/ProfileCard";
-import profiles from "./data/profiles.json";
+// import profiles from "./data/profiles.json";
 import ProfileCard from "./pages/ProfileCard";
 // import Nav from "./components/Nav";
 import { useState } from "react";
 // import changePage from "./ProfileCard";
 import Axios from "axios";
 
-// const { useState, useEffect } = require("react");
+const { useEffect } = require("react");
 
 function App() {
-  const [userNum, setuserNum] = useState(profiles[0].user);
+  // const [userNum, setuserNum] = useState(profiles[0].user);
 
+  const [profileList, setProfileList] = useState([]);
+  useEffect(() => {
+    Axios.get(
+      "https://classdevopscloud.blob.core.windows.net/data/profile-list.json"
+    )
+      .then((response) => {
+        // reponse는 axios 객체
+        // response.data => 응답 내용
+        setProfileList(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+  const [userNum, setUserNum] = useState("bts-jin"); // 페이지 넘기기 용도
   return (
     <>
-      {profiles.map((profile, index) => {
-        if (userNum == profile.user) {
+      {profileList.map((profile, index) => {
+        if (userNum == profile.unique_id) {
           return (
-            <div className={`user${index % 4}`}>
+            <div key={profile.unique_id} className={`user${index % 4}`}>
               <ProfileCard
-                img={`/profile-images/user${index + 1}.jpg`}
-                user={profile.user}
+                profile_image_url={profile.profile_image_url}
+                user={profile.unique_id}
                 name={profile.name}
                 role={profile.role}
-                facebook_url={profile.facebook_url}
-                email={profile.email}
-                changePage={setuserNum}
+                mbti={profile.mbti}
+                instagram_url={profile.instagram_url}
+                changePage={setProfileList}
               >
-                {profiles.map((profile) => {
+                {profileList.map((_profile) => {
                   return (
                     <a
-                      onClick={() => setuserNum(profile.user)}
-                      className={userNum === profile.user ? "on" : ""}
+                      onClick={() => setUserNum(_profile.unique_id)}
+                      className={userNum === _profile.unique_id ? "on" : ""}
                     />
                   );
                 })}
@@ -42,20 +57,6 @@ function App() {
       })}
     </>
   );
-  //   const [profileList, setProfileList] = useState([]);
-  //   useEffect(() => {
-  //     Axios.get(
-  //       "https://classdevopscloud.blob.core.windows.net/data/profile-list.json"
-  //     )
-  //       .then((response) => {
-  //         // reponse는 axios 객체
-  //         // response.data => 응답 내용
-  //         setProfileList(response.data);
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //       });
-  //   }, []);
 
   //   return (
   //     <div>

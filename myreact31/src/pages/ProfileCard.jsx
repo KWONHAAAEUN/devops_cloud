@@ -6,19 +6,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faStickyNote } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { Children } from "react/cjs/react.production.min";
+import { children } from "react/cjs/react.production.min";
 
 library.add(faFacebook);
 
 function ProfileCard({
   children,
   img,
-  user,
+  unique_id,
   name,
   role,
   facebook_url,
   email,
   changePage,
+  profile_image_url,
+  mbti,
+  instagram_url,
 }) {
   //   const [profileList, setProfileList] = useState([]);
   //   const handleClick = () => {
@@ -51,10 +54,11 @@ function ProfileCard({
           </a>
         </nav>
         <article class="profile">
-          <img src={img} />
+          <img src={profile_image_url} />
 
           <h1>{name}</h1>
           <h2>{role}</h2>
+          <h2>{mbti}</h2>
 
           <a href="#" class="btnView">
             VIEW MORE
@@ -64,11 +68,7 @@ function ProfileCard({
           <li>
             <FontAwesomeIcon icon={faFacebook} />{" "}
             {/* <FontAwesomeIcon icon="faFacebookF" /> */}
-            {facebook_url}
-          </li>
-          <li>
-            <i class="fas fa-envelope"></i>
-            <span>{email}</span>
+            {instagram_url}
           </li>
         </ul>
 
