@@ -1,0 +1,44 @@
+[
+    {
+        "user":"user1",
+        "name": "권바보",
+        "role": "바보멍청이",
+        "facebook_url": "kw0nha",
+        "email": "wooyoung_000@naver.com"
+    },
+    {
+        "user":"user2",
+        "name": "이준수",
+        "role": "미남",
+        "facebook_url": "junwater",
+        "email": "leejunwater@naver.com"
+    },
+    {
+        "user":"user3",
+        "name": "김유나",
+        "role": "고급개발자",
+        "facebook_url": "youandi",
+        "email": "youandi@naver.com"
+    },
+    {
+        "user":"user4",
+        "name": "최열",
+        "role": "중급개발자",
+        "facebook_url": "c10",
+        "email": "c10@naver.com"
+    },
+    {
+        "user":"user5",
+        "name": "허성우",
+        "role": "초보개발자",
+        "facebook_url": "sungwoo",
+        "email": "sungwoo@naver.com"
+    },
+    {
+        "user":"user6",
+        "name": "허지수",
+        "role": "민간인",
+        "facebook_url": "z2suu_",
+        "email": "z2suu_@naver.com"
+    }
+]
