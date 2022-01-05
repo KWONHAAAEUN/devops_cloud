@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './ReviewList.css';
 
 const INITIAL_STATE = [
   { content: '리뷰1' },
@@ -15,7 +16,7 @@ function Reviewlist() {
     );
   };
   return (
-    <div>
+    <div className="review-list">
       <h2>ReviewList</h2>
 
       {reviewList.map((review, index) => (
