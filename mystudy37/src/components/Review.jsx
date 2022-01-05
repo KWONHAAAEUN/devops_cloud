@@ -9,7 +9,8 @@ function Review({ review, onClick }) {
         hover:scale-105 cursor-pointer"
       onClick={onClick}
     >
-      {review.content}
+      {review.star}
+      {review.review}
     </div>
   );
 }
