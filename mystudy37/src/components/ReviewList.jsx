@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './ReviewList.css';
+import Review from './Review';
 
 const INITIAL_STATE = [
   { content: '리뷰1' },
@@ -20,7 +21,8 @@ function Reviewlist() {
       <h2>ReviewList</h2>
 
       {reviewList.map((review, index) => (
-        <div onClick={() => removeReview(index)}>{review.content}</div>
+        // <div onClick={() => removeReview(index)}>{review.content}</div>
+        <Review review={review} onClick={() => removeReview(index)} />
       ))}
     </div>
   );
